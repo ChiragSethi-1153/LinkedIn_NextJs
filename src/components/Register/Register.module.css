@@ -1,0 +1,307 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell,
+      "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  }
+  
+  .signup-page {
+    display: -webkit-box;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: transparent;
+    vertical-align: baseline;
+    font-size: 100%;
+    
+  }
+  .signup-Page.MuiBox-root.css-0 {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #f2f3f0;
+  }
+  
+  .signup-main {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    padding-left: 16px;
+    padding-right: 16px;
+    max-width: 1128px;
+    width: 100%;
+   
+    height: auto;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 0 auto;
+    box-sizing: border-box;
+  }
+  .signup-page-logo-div {
+      display: flex;
+      width: 57vw;
+      align-items: center;
+      justify-content: left;
+      background-color: transparent;
+      height: 40px;
+    }
+  
+  .signup-logo {
+    width: 134px;
+    opacity: 1;
+  }
+  
+  .signup-title {
+    text-align: center !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+    color: rgba(0, 0, 0, 0.9) !important;
+    font-weight: 400 !important;
+    font-size: 32px !important;
+  }
+  header.signup-header {
+      width: 100%;
+  }
+  .signup-form-wrapper {
+    width: auto;
+    max-width: 400px;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  
+  .signup-form {
+    background-color: transparent;
+    width: auto;
+    padding-bottom: 0;
+    flex-direction: column;
+    height: auto;
+    display: flex;
+    flex-flow: row wrap;
+    width: 400px;
+    margin: auto;
+    padding-bottom: 24px;
+    background-color: #fff;
+    border-radius: 2px;
+  }
+  
+  .signup-form-section {
+  
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    max-width: 352px;
+    width: auto;
+    margin: 0 auto;
+    padding-top: 24px;
+    background-color: #fff;
+    position: relative;
+    border-radius: 0;
+    display: flex;
+    flex-flow: row wrap;
+    /* background-color: #edf0f3; */
+  }
+  
+  .signup-inputs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .signup-inputs > label {
+    margin-top: 0;
+    color: rgba(0, 0, 0, 0.75) !important;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell,
+      "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  /* .signup-inputs > input {
+      height: 32px !important;
+      background-color: rgba(0, 0, 0, 0) !important;
+      border-color: rgba(0, 0, 0, 0.75) !important;
+      color:rgba(0, 0, 0, 0.9) !important;
+      border-radius: 4px;
+      border-width: 1px;
+      width: 350px;
+      height: 30px;
+      border-style: solid;
+      padding-left: 16px;
+      padding-right: 16px;
+      padding-top: 14px;
+      padding-bottom: 14px;
+      font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'Fira Sans', Ubuntu, Oxygen, 'Oxygen Sans', Cantarell, 'Droid Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Lucida Grande', Helvetica, Arial, sans-serif;
+      font-size: 16px;
+  } */
+  
+  .email {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 0px;
+  }
+  
+  .signup-text {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    font-size: 0.77rem;
+    line-height: 1.33333;
+    color: rgba(0, 0, 0, 0.6);
+    margin: 16px 0 16px 0;
+    text-align: center;
+  }
+  
+  .signup-text-span {
+    color: #0b66c2;
+    cursor: pointer;
+  }
+  .form-divider{
+      display: block;
+      width: auto;
+      margin: 20px auto;
+      width: 100%;
+      color: #696c6f;
+  }
+  .divider-line {
+      display: inline-block;
+      width: 100%;
+      height: 1px;
+      background: #cdcfd2;
+      vertical-align: middle;
+  }
+  .divider-text-content{
+      position: absolute;
+      left: 173px;
+      width: 40%;
+  }
+  .divider-text{
+      padding: 0 20px;
+      background: #edf0f3;
+      background-color: #fff !important;
+      font-size: 16px !important;
+      color: rgba(0, 0, 0, 0.9) !important;
+  }
+  
+  .third-party-container {
+      padding-bottom: 2px;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.6);
+      display: flex;
+      align-items: flex-start;
+      border-radius: 25px;
+      overflow: hidden;
+      max-height: 40px;
+      width: 325px;
+      margin: 0 20px 20px 20px;
+  }
+  
+  .third-party-container:hover {
+      border: 1px solid black;
+      
+  }
+  
+  .google-btn.css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
+      text-transform: none;
+      border: none;
+      background: none;
+      color: black;
+      font-family: "Google Sans",arial,sans-serif;
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      vertical-align: top;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+  
+  }
+  .google-btn.css-1rwt2y5-MuiButtonBase-root-MuiButton-root:hover {
+      border: none;
+  }
+  .form-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding-top: 16px;
+  }
+  
+  
+  .footer-signin-link {
+      color: #0b66c2;
+      font-weight: 500;
+      cursor: pointer;
+  }
+  
+  .help-link {
+      display: flex;
+      justify-content: center;
+      padding-top: 16px;
+      font-size: 0.9rem;
+  }
+  
+  
+  
+  
+  
+  footer {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    vertical-align: baseline;
+  }
+  
+  @media (max-width: 767px) {
+      .UserSignUpPage {
+          display: block;
+        }
+      .signup-main{
+          background-color: #fff;
+          padding: 0;
+      }
+      h1.signup-title{
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+      }
+    .signup-logo{
+      width: 90px;
+      position: absolute;
+      left: 12px;
+      top: -20px;
+    }
+      
+    .signup-form-section {
+      padding-top: 0 !important;
+      padding-left: 16px !important;
+      padding-right: 16px !important;
+    }
+    .signup-title {
+      font-weight: 500 !important;
+      font-size: 24px !important;
+    }
+    .signup-text{
+      font-size: 0.75rem;
+      font-weight: 400;
+      line-height: 1.33333;
+    }
+    .signup-text-span {
+      font-weight: 500;
+      color: #0b66c2;
+    }
+  }
+  
+  @media (max-width: 992px) {
+    
+  }
+  
