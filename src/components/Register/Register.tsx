@@ -11,6 +11,8 @@ import {
   TextField,
   Typography,
   Divider,
+  IconButton,
+  Snackbar,
 } from "@mui/material";
 // import Footer from '../../components/Footer/Footer'
 import GoogleIcon from '../../assets/icons-google.svg'
@@ -22,6 +24,9 @@ import { useAppDispatch } from "@/store/hooks";
 import Link from "next/link";
 import Image from "next/image";
 import Footer from "../Footer/Footer";
+import { useRouter } from "next/navigation";
+import CloseIcon from '@mui/icons-material/Close';
+import { registerUsers } from "@/features/Auth/authAction";
 // import { registerUsers } from '../../redux/slice/signup/signupAction'
 
 export const registerSchema = z.object({
@@ -33,7 +38,7 @@ export type registerationSchema = z.infer<typeof registerSchema>;
 
 const Register = () => {
   const dispatch = useAppDispatch();
-
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -44,15 +49,40 @@ const Register = () => {
   });
 
   const [showPassword, setShowPassword] = useState(false);
-
+  const [open, setOpen] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
 
-  
-  const [inputs, setInputs] = useState({ email: "", password: "" });
+    setOpen(false);
+  };
+  const action = (
+    <React.Fragment>
+      
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
+
   const onSubmit = async (data: FieldValues) => {
     // console.log(data)
     dispatch(registerUsers(data));
     reset();
+    handleClick()
+    setTimeout(() => {
+      router.push('/login')
+    }, 2000)
   };
 
   return (
@@ -76,7 +106,7 @@ const Register = () => {
         <Box className={styles.signupFormWrapper}>
           <form
             className={styles.signuForm}
-            // onSubmit={(e) => {handleSubmit(e)}}
+            onSubmit={handleSubmit(onSubmit)}
           >
             <section className={styles.signupFormSection}>
               <Stack className={styles.signupInputs}>
@@ -230,6 +260,14 @@ const Register = () => {
         </Box>
       </Stack>
       <Footer />
+      <Snackbar
+        open={open}
+        autoHideDuration={1000}
+        onClose={handleClose}
+        message="Signed Up Successfully"
+        action={action}
+        sx={{bgcolor: '#0a66c2'}}
+      />
     </Stack>
   );
 };
