@@ -1,0 +1,102 @@
+
+
+.footer{
+    background-color: #fff;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.footerContent{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex-direction: row;
+    height: 50px;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    list-style: none;
+    font-size: 100%;
+    border: 0;
+    background: transparent;
+}
+
+.listTag {
+    color: rgb(0,0,0,0.6);
+    font-weight: 600;
+    font-size: 12px !important;
+    padding: 8px !important;
+    display: flex;
+    justify-content: flex-start !important;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+    text-align: left;
+    margin: 0;
+    border: 0;
+    vertical-align: 0;
+    background: 0;
+}
+
+.footerYear {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    outline: 0;
+}
+
+.logoSpan{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+    border: 0 !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px !important;
+    overflow: hidden;
+    padding: 0 !important;
+    position: absolute !important;
+    white-space: nowrap !important;
+    width: 1px !important;
+}
+
+.footerIcon {
+    opacity: 1;
+    color: black;
+    display: inline-block;
+    align-self: center;
+    width: 56px;
+    height: 14px;
+    margin-right: 8px;
+}   
+
+
+
+
+
+
+
+
+@media (min-width: 992px) {
+    .footerContent{
+        padding: 0;
+    }
+    .footerContent>li {
+        justify-content: center;
+        width: auto;
+    }
+}

@@ -3,10 +3,11 @@
     padding: 0;
   }
    */
+   @import url('https://fonts.googleapis.com/css2?family=Google+Sans');
 
   
   .signupPage {
-    height: 100%;
+    height: 100vh;
     background: transparent;
     vertical-align: baseline;
     font-size: 100%;
@@ -140,7 +141,7 @@
     padding: 0px;
   }
   
-  .signup-text {
+  .signupText {
     margin-top: 16px;
     margin-bottom: 16px;
     font-size: 0.77rem;
@@ -150,30 +151,30 @@
     text-align: center;
   }
   
-  .signup-text-span {
+  .signupTextSpan {
     color: #0b66c2;
     cursor: pointer;
   }
-  .form-divider{
+  .formDivider{
       display: block;
       width: auto;
       margin: 20px auto;
       width: 100%;
       color: #696c6f;
   }
-  .divider-line {
+  .dividerLine {
       display: inline-block;
       width: 100%;
       height: 1px;
       background: #cdcfd2;
       vertical-align: middle;
   }
-  .divider-text-content{
+  .dividerTextContent{
       position: absolute;
       left: 173px;
       width: 40%;
   }
-  .divider-text{
+  .dividerText{
       padding: 0 20px;
       background: #edf0f3;
       background-color: #fff !important;
@@ -181,9 +182,10 @@
       color: rgba(0, 0, 0, 0.9) !important;
   }
   
-  .third-party-container {
+  .thirdPartyContainer {
       padding-bottom: 2px;
       box-shadow: 0 0 0 1px rgba(0,0,0,0.6);
+      box-sizing: border-box;
       display: flex;
       align-items: flex-start;
       border-radius: 25px;
@@ -193,31 +195,31 @@
       margin: 0 20px 20px 20px;
   }
   
-  .third-party-container:hover {
+  .thirdPartyContainer:hover {
       border: 1px solid black;
       
   }
   
-  .google-btn.css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
-      text-transform: none;
-      border: none;
-      background: none;
-      color: black;
-      font-family: "Google Sans",arial,sans-serif;
-      font-weight: 500;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      vertical-align: top;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
+  .googleBtn {
+      text-transform: none !important;
+      border: none !important;
+      background: none !important;
+      color: black !important;
+      font-family: "Google Sans",arial,sans-serif !important;
+      font-weight: 500 !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      vertical-align: top !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      width: 100% !important;
   
   }
-  .google-btn.css-1rwt2y5-MuiButtonBase-root-MuiButton-root:hover {
-      border: none;
+  .googleBtn:hover {
+      border: none !important;
   }
-  .form-footer {
+  .formFooter {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -226,13 +228,14 @@
   }
   
   
-  .footer-signin-link {
+  .footerSigninLink {
       color: #0b66c2;
       font-weight: 500;
+      text-decoration: none;
       cursor: pointer;
   }
   
-  .help-link {
+  .helpLink {
       display: flex;
       justify-content: center;
       padding-top: 16px;
@@ -255,36 +258,35 @@
       .UserSignUpPage {
           display: block;
         }
-      .signup-main{
+      .signupMain{
           background-color: #fff;
           padding: 0;
       }
-      h1.signup-title{
+      h1.signupTitle{
           padding-left: 0 !important;
           padding-right: 0 !important;
       }
-    .signup-logo{
-      width: 90px;
+    .signupLogo{
       position: absolute;
       left: 12px;
       top: -20px;
     }
       
-    .signup-form-section {
+    .signupFormSection {
       padding-top: 0 !important;
       padding-left: 16px !important;
       padding-right: 16px !important;
     }
-    .signup-title {
+    .signupTitle {
       font-weight: 500 !important;
       font-size: 24px !important;
     }
-    .signup-text{
+    .signupText{
       font-size: 0.75rem;
       font-weight: 400;
       line-height: 1.33333;
     }
-    .signup-text-span {
+    .signupTextSpan {
       font-weight: 500;
       color: #0b66c2;
     }

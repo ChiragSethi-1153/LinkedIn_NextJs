@@ -10,9 +10,10 @@ import {
   OutlinedInput,
   TextField,
   Typography,
+  Divider,
 } from "@mui/material";
 // import Footer from '../../components/Footer/Footer'
-import GoogleIcon from "../../assets/icons-google.svg";
+import GoogleIcon from '../../assets/icons-google.svg'
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -20,13 +21,12 @@ import type { FieldValues } from "react-hook-form";
 import { useAppDispatch } from "@/store/hooks";
 import Link from "next/link";
 import Image from "next/image";
+import Footer from "../Footer/Footer";
 // import { registerUsers } from '../../redux/slice/signup/signupAction'
 
 export const registerSchema = z.object({
-  role: z.string(),
-  name: z.string(),
   email: z.string().email(),
-  password: z.string().min(8, "Password must be atleast 8 characters"),
+  password: z.string().min(6, "Password must be atleast 6 characters"),
 });
 
 export type registerationSchema = z.infer<typeof registerSchema>;
@@ -47,60 +47,13 @@ const Register = () => {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
+  
   const [inputs, setInputs] = useState({ email: "", password: "" });
-  //   const [errorMessage, setErrorMessage] = useState("");
-  //   const [emailErrorMsg, setEmailErrorMsg] = useState("");
-  //   const [navigation, setNavigation] = useState(true)
-
-  //   const validate = (value: string) => {
-  //     if (
-  //       validator.isStrongPassword(value, {
-  //         minLength: 6,
-  //         minLowercase: 1,
-  //         minUppercase: 1,
-  //         minNumbers: 1,
-  //         minSymbols: 1,
-  //       })
-  //     ) {
-  //       setErrorMessage("");
-  //       setNavigation(true)
-  //     } else {
-  //       setErrorMessage("Is Not Strong Password");
-  //       setNavigation(false)
-  //     }
-  //   };
-
-  // const handleEmail = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-  //   setInputs({...inputs, email: e.target.value})
-  //   let emailRegex = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
-  //     if (!emailRegex.test(e.target.value)) {
-  //       setEmailErrorMsg("Please enter a valid email address.");
-  //       setNavigation(false)
-  //     } else {
-  //       setEmailErrorMsg("");
-  //       setNavigation(true)
-  //     }
-  // }
-  // const handlePassword = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-  //   setInputs({...inputs, password: e.target.value})
-  // }
-
-  //   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //     e.preventDefault()
-  //    if(navigation === false){
-  //       alert('Kindly enter Correct Credentials')
-  //    }
-  //    else{
-  //     console.log(inputs)
-  //     // dispatch(registerUsers(inputs))
-  //     // navigate('/login')
-  //    }
-
-  //   }
+  const onSubmit = async (data: FieldValues) => {
+    // console.log(data)
+    dispatch(registerUsers(data));
+    reset();
+  };
 
   return (
     <Stack className={styles.signupPage}>
@@ -127,9 +80,13 @@ const Register = () => {
           >
             <section className={styles.signupFormSection}>
               <Stack className={styles.signupInputs}>
-                <label htmlFor="email" className={styles.signupInputsLabel}>Email</label>
+                <label htmlFor="email" className={styles.signupInputsLabel}>
+                  Email
+                </label>
                 <TextField
+                  {...register("email")}
                   name="email"
+                  type="email"
                   className={styles.email}
                   inputProps={{
                     style: { height: "3px", padding: "14px 16px 14px 16px" },
@@ -146,11 +103,18 @@ const Register = () => {
                   // onChange={(e) => {handleEmail(e)}}
                   required
                 />
-
+                {errors.email && (
+                  <Typography
+                    sx={{ color: "red" }}
+                  >{`${errors.email.message}`}</Typography>
+                )}
                 <br />
-                <label htmlFor="password" className={styles.signupInputsLabel} >Password (6+ characters)</label>
+                <label htmlFor="password" className={styles.signupInputsLabel}>
+                  Password (6+ characters)
+                </label>
                 <OutlinedInput
                   type={showPassword ? "text" : "password"}
+                  {...register("password")}
                   inputProps={{
                     style: {
                       height: "3px",
@@ -172,11 +136,12 @@ const Register = () => {
                   //   handlePassword(e)
                   //   validate(e.target.value)
                   // }}
+                  // onMouseDown={handleMouseDownPassword}
                   endAdornment={
-                    <InputAdornment position="end">
+                    <InputAdornment position="end" >
                       <Button
+                      
                         onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
                         edge="end"
                         sx={{
                           textTransform: "none",
@@ -193,11 +158,78 @@ const Register = () => {
                     </InputAdornment>
                   }
                 />
+                {errors.password && (
+                  <Typography
+                    sx={{ color: "red" }}
+                  >{`${errors.password.message}`}</Typography>
+                )}
               </Stack>
+
+              <p className={styles.signupText} >
+                By clicking Agree & Join or Continue, you agree to the LinkedIn{" "}
+                <span className={styles.signupTextSpan}>User Agreement</span>,{" "}
+                <span className={styles.signupTextSpan}>Privacy Policy</span>, and{" "}
+                <span className={styles.signupTextSpan}>Cookie Policy</span>.
+              </p>
+               <Button
+                variant="contained"
+                style={{
+                  textTransform: "capitalize",
+                  width: "100%",
+                  boxShadow: "none",
+                  height: "min-content",
+                  minHeight: "48px",
+                  borderRadius: "28px",
+                  padding: "10px 24px 10px 24px",
+                  textAlign: "center",
+                  fontSize: "16px",
+                  fontWeight: 500,
+                  fontFamily:
+                    '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif',
+                  backgroundColor: "#0a66c2",
+                }}
+                type="submit"
+              >
+                Agree & Join
+              </Button>
+
+              <Box className={styles.formDivider}>
+                <span>
+                  <span className={styles.dividerLine}></span>
+                </span>
+                <span className={styles.dividerTextContent}>
+                  <span className={styles.dividerText}>or</span>
+                </span>
+              </Box>
+              <Box className={styles.thirdPartyContainer}>
+                <Button
+                  variant="outlined"
+                  startIcon={
+                    <GoogleIcon />
+                  }
+                  className={styles.googleBtn}
+                >
+                  Continue with Google
+                </Button>
+              </Box>
+            
+              <Box className={styles.formFooter}>
+                <p className={styles.formFooterText}>
+                  Already on LinkedIn?{" "}
+                  <Link
+                  href={'/login'}
+                    className={styles.footerSigninLink}
+                  >
+                    {" "}
+                    Sign In{" "}
+                  </Link>
+                </p>
+              </Box>
             </section>
           </form>
         </Box>
       </Stack>
+      <Footer />
     </Stack>
   );
 };
