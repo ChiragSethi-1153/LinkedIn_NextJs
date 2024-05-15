@@ -10,11 +10,9 @@ import {
   OutlinedInput,
   TextField,
   Typography,
-  Divider,
   IconButton,
   Snackbar,
 } from "@mui/material";
-// import Footer from '../../components/Footer/Footer'
 import GoogleIcon from '../../assets/icons-google.svg'
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,7 +25,6 @@ import Footer from "../Footer/Footer";
 import { useRouter } from "next/navigation";
 import CloseIcon from '@mui/icons-material/Close';
 import { registerUsers } from "@/features/Auth/authAction";
-// import { registerUsers } from '../../redux/slice/signup/signupAction'
 
 export const registerSchema = z.object({
   email: z.string().email(),
@@ -178,12 +175,7 @@ const Register = () => {
                       outline: "none",
                     },
                   }}
-                  // value={inputs.password}
-                  // onChange={(e) => {
-                  //   handlePassword(e)
-                  //   validate(e.target.value)
-                  // }}
-                  // onMouseDown={handleMouseDownPassword}
+           
                   endAdornment={
                     <InputAdornment position="end" >
                       <Button

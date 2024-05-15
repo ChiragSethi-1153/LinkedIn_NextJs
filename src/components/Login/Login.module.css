@@ -1,0 +1,115 @@
+
+.loginPage {
+    height: 100%;
+    width: 100%;
+}
+
+.loginFormBox{
+    width: 300px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 24px;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+.thirdPartyContainer{
+    width: 90%;
+}
+
+
+.thirdPartyContainerLogin {
+    padding-bottom: 2px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.6);
+    display: flex;
+    align-items: flex-start;
+    border-radius: 25px;
+    overflow: hidden;
+    max-height: 40px;
+    width: 95%;
+    margin-bottom: 12px;
+}
+
+.thirdPartyBtns.css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
+    text-transform: none;
+    border: none;
+    background: none;
+    color: black;
+    font-family: "Google Sans",arial,sans-serif;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+}
+.loginText {
+    font-size: 0.75rem;
+    text-align: left;
+    font-weight: 400;
+    line-height: 1.33333;
+    color: rgba(0, 0, 0, 0.9);
+    margin: 16px 0 0 0;
+  }
+  
+  .loginTextSpan {
+    font-weight: 500;
+    color: #0b66c2;
+    cursor: pointer;
+  }
+
+.loginFooterText.css-z2eky3-MuiTypography-root {
+    margin: 20px 0 20px 0;
+    font-size: 14px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+}
+
+.loginFooterTextBtn {
+    color: #0b66c2;
+    font-weight: 500;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+
+    border-radius: 20%;
+    cursor: pointer;
+}
+.loginFooterTextBtn:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    background-color: rgb(11, 102, 194, 0.1);
+}
+
+.loginLogo {
+  width: 108px;
+  opacity: 1;
+}
+
+.formDivider{
+    display: block;
+    width: auto;
+    margin: 20px auto;
+    width: 100%;
+    color: #696c6f;
+}
+.dividerLine {
+    display: inline-block;
+    width: 100%;
+    height: 1px;
+    background: #cdcfd2;
+    vertical-align: middle;
+}
+.dividerTextContent{
+    position: absolute;
+    left: 173px;
+    width: 40%;
+}
+.dividerText{
+    padding: 0 20px;
+    background: #edf0f3;
+    background-color: #fff !important;
+    font-size: 16px !important;
+    color: rgba(0, 0, 0, 0.9) !important;
+}
