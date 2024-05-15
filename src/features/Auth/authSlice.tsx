@@ -12,9 +12,9 @@ type initialStateProps = {
         role: string;
         id: string;
       };
-      
-    } 
-    error: Object | null;
+    }
+    signup: any
+    error: object | null;
   };
 
   const initialState: initialStateProps = {
@@ -29,8 +29,9 @@ type initialStateProps = {
         role: '',
         id: '',
       },
-    
     },
+    signup: {}
+
   };
 
 export const authSlice = createSlice({
@@ -56,10 +57,11 @@ export const authSlice = createSlice({
         })
         builder.addCase(registerUsers.fulfilled, (state, action) => {
             state.isLoading = false
-          
+            state.signup = action.payload
         })
         builder.addCase(registerUsers.rejected, (state, action) => {
             state.isLoading = false
+            state.signup = {}
             state.error = action.error
         })
     }

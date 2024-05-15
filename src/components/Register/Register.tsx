@@ -20,7 +20,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import type { FieldValues } from "react-hook-form";
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import Link from "next/link";
 import Image from "next/image";
 import Footer from "../Footer/Footer";
@@ -50,7 +50,11 @@ const Register = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = React.useState(false);
+  const [conflict, setConflict] = React.useState(false)
+  const [err, setErr] = React.useState(false)
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+
   const handleClick = () => {
     setOpen(true);
   };
@@ -58,8 +62,9 @@ const Register = () => {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpen(false);
+    setConflict(false)
+    setErr(false)
   };
   const action = (
     <React.Fragment>
@@ -74,15 +79,27 @@ const Register = () => {
       </IconButton>
     </React.Fragment>
   );
-
+  const user = useAppSelector((state) => state?.auth?.signup)
+ console.log(user)
   const onSubmit = async (data: FieldValues) => {
-    // console.log(data)
+    console.log(data)
     dispatch(registerUsers(data));
     reset();
-    handleClick()
-    setTimeout(() => {
-      router.push('/login')
-    }, 2000)
+    if(user?.status === 200){
+      handleClick()
+      setTimeout(() => {
+        router.push('/login')
+      }, 2000)
+    }
+    else if(user?.status === 409){
+      setConflict(true)
+    }
+    else if(user?.status === 500){
+      setErr(true)
+    }
+    else {
+      setErr(true)
+    }
   };
 
   return (
@@ -265,8 +282,21 @@ const Register = () => {
         autoHideDuration={1000}
         onClose={handleClose}
         message="Signed Up Successfully"
+        action={action} 
+      />
+      <Snackbar
+        open={conflict}
+        autoHideDuration={2000}
+        onClose={handleClose}
+        message={user?.data?.message}
         action={action}
-        sx={{bgcolor: '#0a66c2'}}
+      />
+      <Snackbar
+        open={err}
+        autoHideDuration={2000}
+        onClose={handleClose}
+        message={"Error Occured! Try Again"}
+        action={action}
       />
     </Stack>
   );

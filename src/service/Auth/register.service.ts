@@ -2,8 +2,13 @@ import axios from "axios";
 import type {FieldValues} from "react-hook-form";
 
 const registerService = async (inputs: FieldValues) => {
-    const response = await axios.post("api/register", inputs)
-    console.log(response)
-    return response
+    try{
+        const response = await axios.post("api/auth/register", inputs)
+        console.log(response)
+        return response
+    }catch(err:any){
+        console.log(err)
+        return err?.response
+    }
 }
 export default registerService

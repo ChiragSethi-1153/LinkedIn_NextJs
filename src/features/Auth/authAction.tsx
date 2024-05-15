@@ -10,11 +10,10 @@ export const registerUsers = createAsyncThunk(signupType, async (inputs: FieldVa
     try {
         console.log(inputs)
         const response = await registerService(inputs)
-        // console.log(response)
-        const data = response?.data
+        console.log(response)
         // console.log(data)
-        return data
-    } catch (err) {
+        return response
+    } catch (err: any) {
         console.log(err)
         return rejectWithValue(err)
     }
