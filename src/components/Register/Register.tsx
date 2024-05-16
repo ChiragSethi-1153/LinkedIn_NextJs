@@ -27,6 +27,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { registerUsers } from "@/features/Auth/authAction";
 
 export const registerSchema = z.object({
+  name: z.string(),
   email: z.string().email(),
   password: z.string().min(6, "Password must be atleast 6 characters"),
 });
@@ -119,11 +120,33 @@ const Register = () => {
 
         <Box className={styles.signupFormWrapper}>
           <form
-            className={styles.signuForm}
+            className={styles.signupForm}
             onSubmit={handleSubmit(onSubmit)}
           >
             <section className={styles.signupFormSection}>
               <Stack className={styles.signupInputs}>
+                <label htmlFor="name" className={styles.signupInputsLabel}>
+                  Name
+                </label>
+                <TextField
+                  {...register("name")}
+                  name="name"
+                  type="name"
+                  className={styles.email}
+                  inputProps={{
+                    style: { height: "3px", padding: "14px 16px 14px 16px" },
+                  }}
+                  sx={{
+                    border: "1px solid black",
+                    outline: "none",
+                    mb: 2,
+                    "&.Mui-focused fieldset": {
+                      border: "none",
+                      outline: "none",
+                    },
+                  }}
+                  required
+                />
                 <label htmlFor="email" className={styles.signupInputsLabel}>
                   Email
                 </label>
@@ -143,8 +166,6 @@ const Register = () => {
                       outline: "none",
                     },
                   }}
-                  // value={inputs.email}
-                  // onChange={(e) => {handleEmail(e)}}
                   required
                 />
                 {errors.email && (
@@ -179,7 +200,6 @@ const Register = () => {
                   endAdornment={
                     <InputAdornment position="end" >
                       <Button
-                      
                         onClick={handleClickShowPassword}
                         edge="end"
                         sx={{

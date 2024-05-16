@@ -1,3 +1,4 @@
+import { returnErrorResponse } from "@/utils/errorhandler";
 import axios from "axios";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
@@ -6,30 +7,34 @@ axios.defaults.withCredentials = true;
 
 export async function POST(request: Request) {
   try {
-    // console.log(await request.json())
-    const a = await request.json();
-    console.log(a);
+  
+    const userData = await request.json();
+    console.log(userData);
 
-    
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login`,
-      a,
-    );
-    console.log(res)
-    const token = res.data.token;
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
+      body: JSON.stringify(userData),
+    });
+
+     const data = await res.json();
+    console.log(data);
+    const token = data.token;
 
     localStorage.setItem('token', token)
     
 
-    if (!res) {
-      alert("submitting form failed");
-      return;
+    if (!res.ok) {
+      return returnErrorResponse(data, res.status, res.statusText);
+    } else {
+      return NextResponse.json(data);
     }
-    return NextResponse.json(res.data.user)
 
   } catch (err) {
     console.log(err);
-    alert("submitting form failed");
-      return;
+    return returnErrorResponse(null, 500, "Internal Server Error");
   }
 }

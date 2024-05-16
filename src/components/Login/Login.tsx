@@ -1,190 +1,196 @@
+"use client";
+/* eslint-disable react/no-unescaped-entities */
 import {
-    Box,
-    Button,
-    FormControl,
-    InputAdornment,
-    InputBase,
-    InputLabel,
-    Stack,
-    TextField,
-    Typography,
-  } from "@mui/material";
-  import React, { useState } from "react";
-  import styles from "./Login.module.css";
-  import "../UserSignup/UserSignup.css";
-  import { z } from "zod"; 
-  import AppleIcon from '@mui/icons-material/Apple';
-  import Logo from "../../assets/Linkedin-logo2.png";
-  import GoogleIcon from "../../assets/icons-google.svg";
-  import LinkIcon from "../../assets/link-icon.svg";
+  Box,
+  Button,
+  FormControl,
+  InputAdornment,
+  InputBase,
+  InputLabel,
+  OutlinedInput,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
+import React, { useState } from "react";
+import styles from "./Login.module.css";
+import { z } from "zod";
+import AppleIcon from "@mui/icons-material/Apple";
+import Logo from "../../assets/Linkedin-logo2.png";
+import GoogleIcon from "../../assets/icons-google.svg";
+import LinkIcon from "../../assets/link-icon.svg";
 import { useAppDispatch } from "@/store/hooks";
 import Image from "next/image";
 import Footer from "../Footer/Footer";
-import router from "next/router";
- 
-  
-  
+import { useRouter } from "next/navigation";
+import { FieldValues, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-  export const loginSchema = z.object({
-    email: z.string().email(),
-    password: z.string().min(6, "Password must be atleast 6 characters"),
+export const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6, "Password must be atleast 6 characters"),
+});
+
+export type loginginSchema = z.infer<typeof loginSchema>;
+
+const UserLogin = () => {
+  const dispatch = useAppDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<loginginSchema>({
+    resolver: zodResolver(loginSchema),
   });
-  
-  export type registerationSchema = z.infer<typeof loginSchema>;
+  const [showPassword, setShowPassword] = useState(false);
 
-  
-  const UserLogin = () => {
-    const dispatch = useAppDispatch();
-  
-    const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const router = useRouter();
 
-  
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-  
-    const handleMouseDownPassword = (event) => {
-      event.preventDefault();
-    };
+  const onSubmit = async (data: FieldValues) => {
+    console.log(data)
+    // dispatch(registerUsers(data));
+    // reset();
+    // if(user?.status === 200){
+    //   handleClick()
+    //   setTimeout(() => {
+    //     router.push('/login')
+    //   }, 2000)
+    // }
+    // else if(user?.status === 409){
+    //   setConflict(true)
+    // }
+    // else if(user?.status === 500){
+    //   setErr(true)
+    // }
+    // else {
+    //   setErr(true)
+    }
 
-  
-    return (
+  return (
+    <Stack
+      direction="column"
+      justifyContent="space-between"
+      alignItems="center"
+      className={styles.loginPage}
+      sx={{ backgroundColor: "#fff" }}
+    >
       <Stack
-        direction="column"
-        justifyContent="space-between"
-        alignItems="center"
-        className={styles.loginPage}
-        sx={{ backgroundColor: "#fff", width: '100%', height: '100%' }}
+        direction="row"
+        justifyContent="flex-start"
+        alignItems="flex-start"
+        sx={{
+          width: "90%",
+          marginLeft: "114px",
+          marginTop: "32px",
+        }}
       >
+        <Image
+          src={Logo}
+          alt="Logo"
+          width={108}
+          height={30}
+          className={styles.loginLogo}
+        />
+      </Stack>
+
+      <Box className={styles.loginFormBox}>
         <Stack
-          direction="row"
-          justifyContent="flex-start"
-          alignItems="flex-start"
-          sx={{
-            width: "100%",
-            marginLeft: "114px",
-            marginTop: "32px",
-          }}
+          direction="column"
+          justifyContent="space-between"
+          alignItems="center"
+          className={styles.loginForm}
         >
-          <Image src={Logo} alt="Logo" className={styles.loginLogo} />
-        </Stack>
-  
-        <Box className={styles.loginFormBox}>
-          <Stack
-            direction="column"
-            justifyContent="space-between"
-            alignItems="center"
-            className={styles.loginForm}
-            >
-            <Typography
-              align="left"
+          <Typography
+            align="left"
+            sx={{
+              width: "100%",
+              fontFamily:
+                "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ",
+              fontWeight: "600",
+              fontSize: "32px",
+            }}
+          >
+            Sign in
+          </Typography>
+          <Typography
+            align="left"
+            sx={{
+              width: "100%",
+              fontFamily:
+                "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ",
+              fontSize: "14px",
+            }}
+          >
+            Stay updated on your professional world
+          </Typography>
+
+          <form
+          onSubmit={handleSubmit(onSubmit)}
+          >
+            <TextField
+              label="Email"
+              {...register("email")}
               sx={{
                 width: "100%",
                 fontFamily:
                   "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ",
-                  fontWeight: "600",
-                  fontSize: "32px",
-                }}
-            >
-              Sign in
-            </Typography>
-            <Typography
-              paragraph="true"
-              align="left"
+                fontWeight: "400",
+                fontSize: "32px",
+                position: "relative",
+                zIndex: "1",
+                borderRadius: "4px !important",
+                background: "none",
+                mt: 1,
+              }}
+            />
+            {errors.email && (
+                  <Typography
+                    sx={{ color: "red" }}
+                  >{`${errors.email.message}`}</Typography>
+                )}
+
+            <FormControl
               sx={{
                 width: "100%",
-                fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ",
-                fontSize: "14px",
-                
-            }}
+                display: "flex",
+                alignItems: "center",
+                mt: 2,
+              }}
+              variant="outlined"
             >
-              Stay updated on your professional world
-            </Typography>
-  
-            <form 
-            // onSubmit={}
-            >
-            <TextField
-              label="Email"
-              // variant="filled"
-              sx={{
-                  width: "100%",
-                  fontFamily:
-                  "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ",
-                  fontWeight: "400",
-                  fontSize: "32px",
-                  position: "relative",
-                  zIndex: "1",
-                  borderRadius: "4px !important",
-                  background: "none",
-                }}
-                
-                />
-            <Typography style={{ color: "red" }}>{emailErrorMsg}</Typography>
-              
-              <FormControl sx={{ width: "100%", display: 'flex', alignItems: 'center' }} variant="standard">
-            <InputLabel sx={{padding: '7px 15px'}} htmlFor="standard-adornment-password">
-                Password
-              </InputLabel>
-              <InputBase
-                id="standard-adornment-password"
-                inputProps={{
-                    style: {
-                        
-                        height: "3px",
-                        borderWidth: "1px",
-                        
-                        padding: "14px 16px 14px 16px",
-                    },
-                }}
-                sx={{
-                    marginTop: '10px',
-                    paddingRight: "0",
-                    border: '1px solid #dadada',
-                    borderRadius: '4px',
-                    height: '58px'
-                }}
-                value={inputs.password}
-                disableUnderline={true}
-                onChange={(e) => {
-                    handlePassword(e)
-                    validate(e.target.value)
-                }}
+              <OutlinedInput
                 type={showPassword ? "text" : "password"}
+                {...register("password")}// label="Password"
+                placeholder="Password"
                 endAdornment={
-                    
-                    <InputAdornment position="end">
+                  <InputAdornment position="end">
                     <Button
-                      aria-label="toggle password visibility"
                       onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
                       sx={{
-                          textTransform: "none",
-                          fontSize: "16px",
-                          fontWeight: 500,
-                          fontFamily:
+                        textTransform: "none",
+                        fontSize: "16px",
+                        fontWeight: 500,
+                        fontFamily:
                           '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif',
-                          
-                          "&:hover": { background: "none", border: "none" },
-                        }}
-                        >
+
+                        "&:hover": { background: "none", border: "none" },
+                      }}
+                    >
                       {showPassword ? "Hide" : "Show"}
                     </Button>
                   </InputAdornment>
                 }
-                />
-              <Typography paragraph='true'>
-                {errorMessage === "" ? null : (
-                    <span
-                    style={{
-                        fontWeight: "normal",
-                        color: "red",
-                    }}
-                    >
-                    {errorMessage}
-                  </span>
+              />
+              {errors.password && (
+                  <Typography
+                    sx={{ color: "red" }}
+                  >{`${errors.password.message}`}</Typography>
                 )}
-              </Typography>
             </FormControl>
-  
+
             <Typography
               align="left"
               sx={{
@@ -194,12 +200,12 @@ import router from "next/router";
                 marginTop: "10px",
                 cursor: "pointer",
                 fontFamily:
-                '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif',
-            }}
+                  '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif',
+              }}
             >
               Forgot password?
             </Typography>
-  
+
             <Button
               variant="contained"
               style={{
@@ -222,9 +228,7 @@ import router from "next/router";
             >
               Sign in
             </Button>
-            </form>
-                
-  
+
             {/* <Divider>or</Divider> */}
 
             <Box className={styles.formDivider}>
@@ -235,30 +239,26 @@ import router from "next/router";
                   <span className={styles.dividerText}>or</span>
                 </span>
               </Box>
+
             <Box>
-              <p className='login-text'>
-                By clicking to Continue, you agree to the LinkedIn's 
-              <span className='login-text-span'>User Agreement</span>, 
-              <span className='login-text-span'>Privacy Policy</span>, 
-              and 
-              <span className='login-text-span'>Cookie Policy</span>.
+              <p className={styles.loginText}>
+                By clicking to Continue, you agree to the LinkedIn's
+                <span className={styles.loginTextSpan}>User Agreement</span>,
+                <span className={styles.loginTextSpan}>Privacy Policy</span>,
+                and <span className={styles.loginTextSpan}>Cookie Policy</span>.
               </p>
             </Box>
-              {/* 
-            <Box className="third-party-container-login">
+
+            <Box className={styles.thirdPartyContainerLogin}>
               <Button
                 variant="outlined"
-                startIcon={
-                  <GoogleIcon
-                    style={{ width: "21px", height: "21px", minWidth: "18px" }}
-                  />
-                }
-                className="third-party-btns"
+                startIcon={<GoogleIcon />}
+                className={styles.thirdPartyBtns}
               >
                 Continue with Google
               </Button>
             </Box>
-            <Box className="third-party-container-login">
+            <Box className={styles.thirdPartyContainerLogin}>
               <Button
                 variant="outlined"
                 startIcon={
@@ -266,12 +266,13 @@ import router from "next/router";
                     style={{ width: "21px", height: "21px", minWidth: "18px" }}
                   />
                 }
-                className="third-party-btns"
+                className={styles.thirdPartyBtns}
               >
                 Sign in with Apple
               </Button>
             </Box>
-            <Box className="third-party-container-login">
+
+            <Box className={styles.thirdPartyContainerLogin}>
               <Button
                 variant="outlined"
                 startIcon={
@@ -279,35 +280,36 @@ import router from "next/router";
                     style={{ width: "21px", height: "21px", minWidth: "18px" }}
                   />
                 }
-                className="third-party-btns"
+                className={styles.thirdPartyBtns}
               >
                 Sign in with a one-time link
               </Button>
             </Box>
-            <Box className="third-party-container-login">
-              <Button
-                variant="outlined"
-                className="third-party-btns"
-              >
+            <Box className={styles.thirdPartyContainerLogin}>
+              <Button variant="outlined" className={styles.thirdPartyBtns}>
                 Sign in with a passkey
               </Button>
             </Box>
-        */}
-        
-          </Stack>
-        </Box>
-        
-         <Box>
-           <Typography paragraph={true} className={styles.loginFooterText}>New to LinkedIn? 
-           <span className={styles.loginFooterTextBtn} onClick={() => router.push('/register')}>Join Now</span> </Typography>
-         </Box>
-  
-         <footer style={{ width: "100%" }}>
-           <Footer />
-         </footer>
-      </Stack> 
-    );
-  };
-  
-  export default UserLogin;
-  
+          </form>
+        </Stack>
+      </Box>
+
+      <Box>
+        <Typography className={styles.loginFooterText}>
+          New to LinkedIn?
+          <span
+            className={styles.loginFooterTextBtn}
+            onClick={() => router.push("/register")}
+          >
+            Join Now
+          </span>{" "}
+        </Typography>
+      </Box>
+
+        <Footer />
+
+    </Stack>
+  );
+};
+
+export default UserLogin;
