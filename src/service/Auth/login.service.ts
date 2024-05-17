@@ -4,7 +4,8 @@ import type {FieldValues} from "react-hook-form";
 const loginService = async (inputs: FieldValues) => {
     try{
         const response = await axios.post("api/auth/login", inputs)
-        console.log(response)
+        const token = response?.data?.token;
+        localStorage.setItem('token', token)
         return response
     }catch(err:any){
         console.log(err)

@@ -1,4 +1,4 @@
-import { returnErrorResponse } from "@/utils/errorhandler";
+import { returnErrorResponse } from "@/utils/errorHandler";
 import axios from "axios";
 import { NextResponse } from "next/server";
 
@@ -8,8 +8,7 @@ export async function POST(request: Request) {
   try {
     
     const userData = await request.json();
-    console.log(userData);
-    
+       
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/signup`, {
       method: "POST",
       headers: {
@@ -20,8 +19,6 @@ export async function POST(request: Request) {
     });
 
     const data = await res.json();
-    console.log(data);
-
     if (!res.ok) {
       return returnErrorResponse(data, res.status, res.statusText);
     } else {

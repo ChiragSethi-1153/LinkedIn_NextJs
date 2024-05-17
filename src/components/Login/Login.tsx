@@ -4,10 +4,12 @@ import {
   Box,
   Button,
   FormControl,
+  IconButton,
   InputAdornment,
   InputBase,
   InputLabel,
   OutlinedInput,
+  Snackbar,
   Stack,
   TextField,
   Typography,
@@ -25,6 +27,8 @@ import Footer from "../Footer/Footer";
 import { useRouter } from "next/navigation";
 import { FieldValues, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { loginUsers } from "@/features/Auth/authAction";
+import CloseIcon from '@mui/icons-material/Close';
 
 export const loginSchema = z.object({
   email: z.string().email(),
@@ -44,29 +48,59 @@ const UserLogin = () => {
     resolver: zodResolver(loginSchema),
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [conflict, setConflict] = React.useState(false)
+  const [invalid, setInvalid] = React.useState(false)
+  const [err, setErr] = React.useState(false)
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const router = useRouter();
 
   const onSubmit = async (data: FieldValues) => {
-    console.log(data)
-    // dispatch(registerUsers(data));
-    // reset();
-    // if(user?.status === 200){
-    //   handleClick()
-    //   setTimeout(() => {
-    //     router.push('/login')
-    //   }, 2000)
-    // }
-    // else if(user?.status === 409){
-    //   setConflict(true)
-    // }
-    // else if(user?.status === 500){
-    //   setErr(true)
-    // }
-    // else {
-    //   setErr(true)
+    const loginData = await dispatch(loginUsers(data));
+    reset();
+    if(loginData?.payload?.status === 200){
+      setOpen(true);
+      setTimeout(() => {
+        router.push('/')
+      }, 2000)
     }
+    else if(loginData?.payload?.status === 404){
+      setConflict(true)
+    }
+    else if(loginData?.payload?.status === 400){
+      setInvalid(true)
+    }
+    else if(loginData?.payload?.status === 500){
+      setErr(true)
+    }
+    else {
+      setErr(true)
+    }
+    }
+
+    const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpen(false);
+      setConflict(false)
+      setInvalid(false)
+      setErr(false)
+    };
+    const action = (
+      <React.Fragment>
+        
+        <IconButton
+          size="small"
+          aria-label="close"
+          color="inherit"
+          onClick={handleClose}
+        >
+          <CloseIcon fontSize="small" />
+        </IconButton>
+      </React.Fragment>
+    );
 
   return (
     <Stack
@@ -142,7 +176,7 @@ const UserLogin = () => {
                 zIndex: "1",
                 borderRadius: "4px !important",
                 background: "none",
-                mt: 1,
+                mt: 2,
               }}
             />
             {errors.email && (
@@ -162,13 +196,12 @@ const UserLogin = () => {
             >
               <OutlinedInput
                 type={showPassword ? "text" : "password"}
-                {...register("password")}// label="Password"
+                {...register("password")}
                 placeholder="Password"
                 endAdornment={
                   <InputAdornment position="end">
                     <Button
                       onClick={handleClickShowPassword}
-                      edge="end"
                       sx={{
                         textTransform: "none",
                         fontSize: "16px",
@@ -307,7 +340,34 @@ const UserLogin = () => {
       </Box>
 
         <Footer />
-
+        <Snackbar
+        open={open}
+        autoHideDuration={1000}
+        onClose={handleClose}
+        message="Logged in Successfully"
+        action={action} 
+      />
+        <Snackbar
+        open={invalid}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message="Invalid Credentials"
+        action={action} 
+      />
+      <Snackbar
+        open={conflict}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message={"User does not exists! Kindly signup"}
+        action={action}
+      />
+      <Snackbar
+        open={err}
+        autoHideDuration={4000}
+        onClose={handleClose}
+        message={"Error Occured! Try Again"}
+        action={action}
+      />
     </Stack>
   );
 };

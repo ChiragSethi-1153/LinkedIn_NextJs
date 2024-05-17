@@ -5,6 +5,8 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import ReduxProvider from "@/store/reduxProvider";
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../theme/theme';
+import { Stack } from "@mui/material";
+import Navbar from "@/components/Navbar/Navbar";
 
 
 export const metadata: Metadata = {
@@ -23,7 +25,10 @@ export default function RootLayout({
       <AppRouterCacheProvider>
       <ThemeProvider theme={theme}>
       <ReduxProvider>
+        <Stack>
+        <Navbar />
         {children}
+        </Stack>
       </ReduxProvider>
       </ ThemeProvider>
       </ AppRouterCacheProvider>

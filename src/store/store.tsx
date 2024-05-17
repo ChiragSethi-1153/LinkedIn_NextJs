@@ -9,7 +9,7 @@ const persistConfig = {
     storage: storage,
     whitelist: ["auth"],
   };
-
+  
   const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 

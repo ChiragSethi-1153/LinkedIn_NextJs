@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {  registerUsers } from './authAction'
+import {  loginUsers, registerUsers } from './authAction'
 
 type initialStateProps = {
     isLoading: boolean;
@@ -13,7 +13,6 @@ type initialStateProps = {
         id: string;
       };
     }
-    signup: any
     error: object | null;
   };
 
@@ -30,7 +29,6 @@ type initialStateProps = {
         id: '',
       },
     },
-    signup: {}
 
   };
 
@@ -39,31 +37,20 @@ export const authSlice = createSlice({
     initialState: initialState,
     reducers: {},
     extraReducers: (builder) => {
-        // builder.addCase(loginUsers.pending, (state) => {
-        //     state.isLoading = true
-        // })
-        // builder.addCase(loginUsers.fulfilled, (state, action) => {
-        //     state.isLoading = false
-        //     state.isLoggedIn=true
-        //     // console.log(action.payload)
-        //     state.content = action.payload
-        // })
-        // builder.addCase(loginUsers.rejected, (state, action) => {
-        //     state.isLoading = false
-        //     state.error = action.error
-        // })
-        builder.addCase(registerUsers.pending, (state) => {
+        builder.addCase(loginUsers.pending, (state) => {
             state.isLoading = true
         })
-        builder.addCase(registerUsers.fulfilled, (state, action) => {
+        builder.addCase(loginUsers.fulfilled, (state, action) => {
             state.isLoading = false
-            state.signup = action.payload
+            state.isLoggedIn=true
+            // console.log(action.payload)
+            state.content = action.payload
         })
-        builder.addCase(registerUsers.rejected, (state, action) => {
+        builder.addCase(loginUsers.rejected, (state, action) => {
             state.isLoading = false
-            state.signup = {}
             state.error = action.error
         })
+        
     }
 })
 

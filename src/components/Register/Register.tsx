@@ -25,6 +25,7 @@ import Footer from "../Footer/Footer";
 import { useRouter } from "next/navigation";
 import CloseIcon from '@mui/icons-material/Close';
 import { registerUsers } from "@/features/Auth/authAction";
+import { clearSignupData } from "@/features/Auth/registerSlice";
 
 export const registerSchema = z.object({
   name: z.string(),
@@ -53,9 +54,6 @@ const Register = () => {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleClick = () => {
-    setOpen(true);
-  };
   const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
       return;
@@ -77,22 +75,21 @@ const Register = () => {
       </IconButton>
     </React.Fragment>
   );
-  const user = useAppSelector((state) => state?.auth?.signup)
- console.log(user)
+
   const onSubmit = async (data: FieldValues) => {
-    console.log(data)
-    dispatch(registerUsers(data));
+    const signupData = await dispatch(registerUsers(data));
     reset();
-    if(user?.status === 200){
-      handleClick()
+    if(signupData?.payload?.status === 200){
+      setOpen(true);
       setTimeout(() => {
+        dispatch(clearSignupData(signupData))
         router.push('/login')
       }, 2000)
     }
-    else if(user?.status === 409){
+    else if(signupData?.payload?.status === 409){
       setConflict(true)
     }
-    else if(user?.status === 500){
+    else if(signupData?.payload?.status === 500){
       setErr(true)
     }
     else {
@@ -201,7 +198,6 @@ const Register = () => {
                     <InputAdornment position="end" >
                       <Button
                         onClick={handleClickShowPassword}
-                        edge="end"
                         sx={{
                           textTransform: "none",
                           fontSize: "16px",
@@ -300,7 +296,7 @@ const Register = () => {
         open={conflict}
         autoHideDuration={2000}
         onClose={handleClose}
-        message={user?.data?.message}
+        message={"User Already Exists! Please Login Instead"}
         action={action}
       />
       <Snackbar
