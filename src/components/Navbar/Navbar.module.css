@@ -1,0 +1,58 @@
+.Navbar {
+    background-color: #fff;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: none;
+    flex-shrink: 0;
+    position: fixed;
+    /* z-index: 100; */
+    top: 0;
+    height: 51px;
+    right: 0;
+    left: 0;
+    padding: 0 2.4rem;
+    z-index: 105;
+    border-bottom: 1px solid rgb(140 140 140/.2);
+}
+
+.searchField{
+    background-color: #ecf2f8;
+    height: 35px;
+    max-width: 280px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 1px 1px 1px 8px;
+    border-radius: 5px;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell,
+    "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif !important;
+    color: black !important;
+    font-size: 15px !important;
+    border: 1px solid #fff;
+}
+.searchField:focus-within{
+    border: 1px solid black;
+}
+
+.tabs {
+    text-transform: none !important;
+    font-size: 12px !important; 
+    padding: 0 !important;
+    width: 85px !important;
+    height: 54px;
+    min-height: unset !important;
+    min-width: unset !important;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell,
+    "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif !important;
+    font-weight: 400 !important;
+}
